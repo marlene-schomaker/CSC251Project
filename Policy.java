@@ -22,7 +22,7 @@ public class Policy
       weight = 0;
    }
    
-   public Policy(String pNumber, String pName, String fName, String lName,int a, String sStatus, double h, double w)
+   public Policy(String pNumber, String pName, String fName, String lName, int a, String sStatus, double h, double w)
    {
       policyNumber = pNumber;
       providerName = pName;
@@ -137,7 +137,7 @@ public class Policy
    }
    
    
-   //Displays information about the Policy
+   /*Displays information about the Policy
    public void displayInformation()
    {
       System.out.println("Policy Number: " + policyNumber);
@@ -149,6 +149,7 @@ public class Policy
       System.out.println("Policyholder's Height: " + height + " inches");
       System.out.println("Policyholder's Weight: " + weight + " pounds");
       System.out.printf("Policyholder's BMI: %.2f\n", getBMI());
-      System.out.printf("Policy Price: $%.2f\n", getPrice());
-   }
+      System.out.printf("Policy Price: $%.2f\n", getPrice()); 
+      
+   } */
 }

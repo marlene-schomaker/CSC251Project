@@ -1,50 +1,72 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+
 
 public class Project_marlene_schomaker {
    public static void main(String[] args) {
-      Scanner scnr = new Scanner(System.in);
-
-      System.out.print("Please enter the Policy Number: ");
-      int policy_number = scnr.nextInt();
-      scnr.nextLine();
-
-      System.out.print("Please enter the Provider Name: ");
-      String provider_name = scnr.nextLine();
-
-      System.out.print("Please enter the Policyholder’s First Name: ");
-      String first_name = scnr.nextLine();
-
-      System.out.print("Please enter the Policyholder’s Last Name: ");
-      String last_name = scnr.nextLine();
-
-      System.out.print("Please enter the Policyholder’s Age: ");
-      int age = scnr.nextInt();
-      scnr.nextLine();
-
-      System.out.print("Please enter the Policyholder’s Smoking Status (smoker/non-smoker): ");
-      String smoking_status = scnr.nextLine();
-
-      System.out.print("Please enter the Policyholder’s Height (in inches): ");
-      double height_inches = scnr.nextDouble();
-
-      System.out.print("Please enter the Policyholder’s Weight (in pounds): ");
-      double weight_pounds = scnr.nextDouble();
-
-      Policy policy = new Policy(policy_number, provider_name, first_name, last_name,
-                                   age, smoking_status, height_inches, weight_pounds);
-
-      System.out.println("Policy Number: " + policy.getPolicyNumber() + "\n");
-      System.out.println("Provider Name: " + policy.getProviderName() + "\n");
-      System.out.println("Policyholder’s First Name: " + policy.getFirstName() + "\n");
-      System.out.println("Policyholder’s Last Name: " + policy.getLastName() + "\n");
-      System.out.println("Policyholder’s Age: " + policy.getAge());
-      System.out.println("Policyholder’s Smoking Status: "  + policy.getSmokingStatus() + "\n");
-      System.out.println("Policyholder’s Height: " + policy.getHeightInches() + " inches");
-      System.out.println("Policyholder’s Weight: " + policy.getWeightPounds() + " pounds");
-      System.out.printf("Policyholder’s BMI: %.2f%n\n", policy.calculateBMI());
-      System.out.printf("Policy Price: $%.2f%n\n", policy.calculatePolicyPrice());
-
-      scnr.close();
+      try 
+      {
+         File file = new File("PolicyInformation.txt");                       
+         Scanner inputFile = new Scanner(file);
       
+         //declare the variables
+         String policyNumber = "", providerName = "", firstName = "", lastName = "", smokingStatus = "";
+         double height = 0.0, weight = 0.0;
+         int age = 0;
+      
+         //Create an array list to store objects. The ArrayList will hold Course objects.
+         ArrayList<Policy> policies = new ArrayList<Policy>();
+      
+         /* Use a while loop to read the file. Use the hasNext() method to determine whether 
+            the file has more data to be read. Use an "if statement" to determine the end of the file and 
+            to consume newline characters */
+      
+         while(inputFile.hasNext())       
+         { //open loop
+         
+            policyNumber = inputFile.nextLine();  
+            providerName = inputFile.nextLine();
+            firstName = inputFile.nextLine();
+            lastName = inputFile.nextLine();
+            age = Integer.parseInt(inputFile.nextLine());
+            smokingStatus = inputFile.nextLine();
+            height = Double.parseDouble(inputFile.nextLine());
+            weight = Double.parseDouble(inputFile.nextLine());
+         
+            if(inputFile.hasNext())
+            { 
+               inputFile.nextLine();
+            }
+        
+            Policy p = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight); //Passing variables as arguments to the constructor
+         
+            // Add objects to the ArrayList 
+            policies.add(p); 
+         
+         } //close loop
+      
+         inputFile.close();//close the file
+      
+         //use a for loop to display the output
+         for (int i = 0; i < policies.size(); i++) {
+            System.out.println("Policy Number: " + policies.get(i).getPolicyNumber());
+            System.out.println("Provider Name: " + policies.get(i).getProviderName());
+            System.out.println("Policyholder's First Name: " + policies.get(i).getFirstName());
+            System.out.println("Policyholder's Last Name: " + policies.get(i).getLastName());
+            System.out.println("Policyholder's Age: " + policies.get(i).getAge());
+            System.out.println("Policyholder's Smoking Status (smoker/non-smoker): " + policies.get(i).getSmokingStatus());
+            System.out.println("Policyholder's Height: " + policies.get(i).getHeight() + " inches");
+            System.out.println("Policyholder's Weight: " + policies.get(i).getWeight() + " pounds");
+            System.out.printf("Policyholder's BMI: %.2f\n", policies.get(i).getBMI());
+            System.out.printf("Policy Price: $%.2f\n", policies.get(i).getPrice());
+         }
+      
+      }//close the "try" block of code
+      
+      catch(IOException ex)//If something goes wrong, an IOException is "thrown" to us, and we "catch" it and deal with it
+      {
+         //use the getMessage method of the exception we "caught" to print out it's message about what went wrong
+         System.out.println("Something went wrong reading the file: " + ex.getMessage());
+      }         
    }
 }
