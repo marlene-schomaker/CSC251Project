@@ -12,7 +12,7 @@ public class Project_marlene_schomaker {
          //declare the variables
          String policyNumber = "", providerName = "", firstName = "", lastName = "", smokingStatus = "";
          double height = 0.0, weight = 0.0;
-         int age = 0;
+         int age = 0, smokers = 0, nonSmokers = 0;
       
          //Create an array list to store objects. The ArrayList will hold Course objects.
          ArrayList<Policy> policies = new ArrayList<Policy>();
@@ -32,6 +32,14 @@ public class Project_marlene_schomaker {
             smokingStatus = inputFile.nextLine();
             height = Double.parseDouble(inputFile.nextLine());
             weight = Double.parseDouble(inputFile.nextLine());
+            
+            if (smokingStatus.equals("smoker")) {
+               smokers ++;
+            }
+            else {
+               nonSmokers++;
+            }
+            
          
             if(inputFile.hasNext())
             { 
@@ -58,8 +66,11 @@ public class Project_marlene_schomaker {
             System.out.println("Policyholder's Height: " + policies.get(i).getHeight() + " inches");
             System.out.println("Policyholder's Weight: " + policies.get(i).getWeight() + " pounds");
             System.out.printf("Policyholder's BMI: %.2f\n", policies.get(i).getBMI());
-            System.out.printf("Policy Price: $%.2f\n", policies.get(i).getPrice());
+            System.out.printf("Policy Price: $%.2f\n\n", policies.get(i).getPrice());
          }
+         
+         System.out.println("The number of policies with a smoker is: " + smokers);
+         System.out.println("The number of policies with a non-smoker is: " + nonSmokers);
       
       }//close the "try" block of code
       
