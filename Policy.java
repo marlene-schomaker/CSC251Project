@@ -2,36 +2,18 @@ public class Policy
 {  //fields
    private String policyNumber;
    private String providerName;
-   private String firstName;
-   private String lastName;
-   private int age;
-   private String smokingStatus;
-   private double height;
-   private double weight;
 
    //constructors
    public Policy()
    {
       policyNumber = "";
       providerName = "";
-      firstName = "";
-      lastName = "";
-      age = 0;
-      smokingStatus = "";
-      height = 0;
-      weight = 0;
    }
    
-   public Policy(String pNumber, String pName, String fName, String lName, int a, String sStatus, double h, double w)
+   public Policy(String pNumber, String pName)
    {
       policyNumber = pNumber;
       providerName = pName;
-      firstName = fName;
-      lastName = lName;
-      age = a;
-      smokingStatus = sStatus;
-      height = h;
-      weight = w;
    }
    
    //setters
@@ -42,30 +24,6 @@ public class Policy
    
    public void setProviderName(String pName){
       providerName = pName;
-   }
-   
-   public void setFirstName(String fName){
-      firstName = fName;
-   }
-   
-   public void setLastName(String lName) {
-      lastName = lName;
-   }
-   
-   public void setAge(int a) {
-      age = a;
-   }
-   
-   public void setSmokingStatus(String sStatus) {
-      smokingStatus = sStatus;
-   }
-   
-   public void setHeight(double h) {
-      height = h;
-   }
-   
-   public void setWeight(double w) {
-      weight = w;
    }
 
    
@@ -78,37 +36,7 @@ public class Policy
       return providerName;
    }
    
-   public String getFirstName() {
-      return firstName;
-   }
    
-   public String getLastName() {
-      return lastName;
-   }
-   
-   public int getAge() {
-      return age;
-   }
-   
-   public String getSmokingStatus() {
-      return smokingStatus;
-   }
-   
-   public double getHeight() {
-      return height;
-   }
-   
-   public double getWeight() {
-      return weight;
-   }
-   
-      
-   //Calculates the Policyholder's BMI
-   public double getBMI() {
-      final double conversionFactor = 703;
-      
-      return (weight * conversionFactor) / (height * height);
-   }
    
    //Calculates the Policy's price
    public double getPrice()
