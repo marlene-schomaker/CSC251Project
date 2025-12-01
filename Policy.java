@@ -35,8 +35,7 @@ public class Policy
    public String getProviderName() {
       return providerName;
    }
-   
-   
+
    
    //Calculates the Policy's price
    public double getPrice()
@@ -62,6 +61,14 @@ public class Policy
          price += ((getBMI() - BMI_threshold) * additional_BMI_fee); //additional BMI fee - 20
          
       return price;
+   }
+   
+   //to string method
+   @Override
+   public String toString() {
+      return "Policy Number: " + policyNumber +
+             "\nProvider Name: " + providerName +
+             "\nPolicy Price: $" + getPrice();
    }
    
 }
