@@ -4,8 +4,9 @@ import java.util.*;
 
 public class Project_marlene_schomaker {
    public static void main(String[] args) {
-      try 
-      {
+      //Create an array list to store objects. The ArrayList will hold Course objects.
+      ArrayList<Policy> policies = new ArrayList<Policy>();
+      try {
          File file = new File("PolicyInformation.txt");                       
          Scanner inputFile = new Scanner(file);
       
@@ -14,8 +15,7 @@ public class Project_marlene_schomaker {
          double height = 0.0, weight = 0.0;
          int age = 0, smokers = 0, nonSmokers = 0;
       
-         //Create an array list to store objects. The ArrayList will hold Course objects.
-         ArrayList<Policy> policies = new ArrayList<Policy>();
+         
       
          /* Use a while loop to read the file. Use the hasNext() method to determine whether 
             the file has more data to be read. Use an "if statement" to determine the end of the file and 
@@ -26,6 +26,7 @@ public class Project_marlene_schomaker {
          
             policyNumber = inputFile.nextLine();  
             providerName = inputFile.nextLine();
+            
             firstName = inputFile.nextLine();
             lastName = inputFile.nextLine();
             age = Integer.parseInt(inputFile.nextLine());
@@ -45,30 +46,26 @@ public class Project_marlene_schomaker {
             { 
                inputFile.nextLine();
             }
+            
+            PolicyHolder holder = new PolicyHolder(firstName, lastName, age, smokingStatus, height, weight);
+            Policy policy = new Policy(policyNumber, providerName, holder); 
+            //Passing variables as arguments to the constructor
         
-            Policy p = new Policy(policyNumber, providerName, firstName, lastName, age, smokingStatus, height, weight); //Passing variables as arguments to the constructor
-         
             // Add objects to the ArrayList 
-            policies.add(p); 
+            policies.add(policy); 
+            
          
          } //close loop
       
          inputFile.close();//close the file
       
          //use a for loop to display the output
-         for (int i = 0; i < policies.size(); i++) {
-            System.out.println("Policy Number: " + policies.get(i).getPolicyNumber());
-            System.out.println("Provider Name: " + policies.get(i).getProviderName());
-            System.out.println("Policyholder's First Name: " + policies.get(i).getFirstName());
-            System.out.println("Policyholder's Last Name: " + policies.get(i).getLastName());
-            System.out.println("Policyholder's Age: " + policies.get(i).getAge());
-            System.out.println("Policyholder's Smoking Status (smoker/non-smoker): " + policies.get(i).getSmokingStatus());
-            System.out.println("Policyholder's Height: " + policies.get(i).getHeight() + " inches");
-            System.out.println("Policyholder's Weight: " + policies.get(i).getWeight() + " pounds");
-            System.out.printf("Policyholder's BMI: %.2f\n", policies.get(i).getBMI());
-            System.out.printf("Policy Price: $%.2f\n\n", policies.get(i).getPrice());
+         for (Policy p : policies) {
+            System.out.println(p);
+            System.out.println();
          }
          
+         System.out.println("There were " + Policy.getPolicyCount() + " Policy objects created.");
          System.out.println("The number of policies with a smoker is: " + smokers);
          System.out.println("The number of policies with a non-smoker is: " + nonSmokers);
       

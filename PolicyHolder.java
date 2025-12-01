@@ -122,11 +122,13 @@ public class PolicyHolder {
    //toString method
    @Override
    public String toString() {
-      return "Policyholder's First Name: " + firstName +
-           "\nPolicyholder's Last Name: " + lastName +
-           "\nPolicyholder's Age: " + age +
-           "\nPolicyholder's Smoking Status (Y/N): " + (smoker ? "smoker" : "non-smoker") +
-           "\nPolicyholder's Height: " + height + " inches" +
-           "\nPolicyholder's Weight: " + weight + " pounds";
+      return String.format(
+          "Policyholder's First Name: %s" +
+          "\nPolicyholder's Last Name: %s" +
+          "\nPolicyholder's Age: %d" +
+          "\nPolicyholder's Smoking Status (Y/N): %s" +
+          "\nPolicyholder's Height: %.1f" + " inches" +
+          "\nPolicyholder's Weight: %.1f"  + "pounds" +
+          "\nPolicyholder's BMI: %.2f", firstName, lastName, age, smokingStatus,height, weight, getBMI());
    }
 }  

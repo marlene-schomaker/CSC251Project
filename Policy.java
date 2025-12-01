@@ -3,19 +3,28 @@ public class Policy
    private static int policyCount = 0;
    private String policyNumber;
    private String providerName;
+   private PolicyHolder policyHolder;
 
    //constructors
    public Policy()
    {
       policyNumber = "";
       providerName = "";
+      policyHolder = new PolicyHolder();
+      policyCount++;
    }
    
-   public Policy(String pNumber, String pName)
+   public Policy(String pNumber, String pName, PolicyHolder holder)
    {
       policyNumber = pNumber;
       providerName = pName;
+      policyHolder = holder;
       policyCount++;
+   }
+   
+   //policy count
+   public static int getPolicyCount() {
+      return policyCount;
    }
    
    //setters
@@ -28,8 +37,11 @@ public class Policy
       providerName = pName;
    }
 
-   
    //getters
+   public PolicyHolder getPolicyHolder() {
+      return policyHolder;
+   }
+   
    public String getPolicyNumber() {
       return policyNumber;
    }
@@ -37,11 +49,7 @@ public class Policy
    public String getProviderName() {
       return providerName;
    }
-   
-   public static int getPolicyCount() {
-      return policyCount;
-   }
-   
+      
    //Calculates the Policy's price
    public double getPrice()
    {
@@ -50,30 +58,38 @@ public class Policy
       final double additional_smoking_fee = 100;
       final double additional_BMI_fee = 20;
       
+      int age = policyHolder.getAge();
+      String smoker = policyHolder.getSmokingStatus();
+      double bmi = policyHolder.getBMI();
+      
       final int age_threshold = 50;
       final int BMI_threshold = 35;
       
       double price = base_price;
       
-      if(age > age_threshold) //over 50 years
-         price += additional_age_fee; //75
+      if(age > age_threshold) {
+         price += additional_age_fee; 
+      }
          
-      if(smokingStatus.equalsIgnoreCase("smoker")) 
-         price += additional_smoking_fee; //100
+      if(smoker.equalsIgnoreCase("smoker")) {
+         price += additional_smoking_fee; 
+      }   
             
-      //call the getBMI method
-      if(getBMI() > BMI_threshold) //BMI over 35
-         price += ((getBMI() - BMI_threshold) * additional_BMI_fee); //additional BMI fee - 20
-         
+      if(bmi > BMI_threshold) {
+         price += ((bmi - BMI_threshold) * additional_BMI_fee); //additional BMI fee - 20
+      }   
+      
       return price;
    }
    
    //to string method
    @Override
    public String toString() {
-      return "Policy Number: " + policyNumber +
-             "\nProvider Name: " + providerName +
-             "\nPolicy Price: $" + getPrice();
+      return String.format(
+          "Policy Number: %s" +
+          "\nProvider Name: %s" + 
+          "\n%s"  +
+          "\nPolicy Price: $%.2f", policyNumber, providerName, policyHolder.toString(), getPrice());
    }
    
 }
