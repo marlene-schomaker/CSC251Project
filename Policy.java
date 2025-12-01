@@ -1,5 +1,6 @@
 public class Policy
 {  //fields
+   private static int policyCount = 0;
    private String policyNumber;
    private String providerName;
 
@@ -14,6 +15,7 @@ public class Policy
    {
       policyNumber = pNumber;
       providerName = pName;
+      policyCount++;
    }
    
    //setters
@@ -35,7 +37,10 @@ public class Policy
    public String getProviderName() {
       return providerName;
    }
-
+   
+   public static int getPolicyCount() {
+      return policyCount;
+   }
    
    //Calculates the Policy's price
    public double getPrice()
